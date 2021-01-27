@@ -82,13 +82,11 @@ exports.findUser = (req, res) => {
    });
 }
 exports.updateUser = (req, res) => {
-   console.log(req.body)
    var ids = req.body.id;
    delete req.body.id;
-   var sql = "UPDATE user_registration set ? WHERE user_id = ? "
+   var sql = "UPDATE user_registration set ?  WHERE user_id = ? "
    connection.query(sql, [req.body, ids], (err, data) => {
       if (err) {
-         console.log(err)
          res.send({
             success: false,
             message: 'not updated !',

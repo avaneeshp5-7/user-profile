@@ -11,6 +11,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGaurdService } from './auth-gaurd.service';
 import { HttpAuthGaurdService } from './http-auth-gaurd.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
