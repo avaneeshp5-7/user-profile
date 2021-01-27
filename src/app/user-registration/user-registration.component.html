@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 set-position">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Please sign up <small>It's free!</small></h5>
+                </div>
+                <div class="panel-body">
+                    <form [formGroup]="registrationForm">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="first_name" formControlName="fname"
+                                        class="form-control input-sm shadow-none shadow-none" placeholder="First Name">
+                                    <img src="../../assets/err.png"
+                                        *ngIf="(registrationForm.controls.fname.touched || submitted) && registrationForm.controls.fname.errors?.required"
+                                        class="set-validation-text">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="lname" id="last_name"
+                                        class="form-control input-sm shadow-none" placeholder="Last Name">
+                                    <img src="../../assets/err.png" class="set-validation-text"
+                                        *ngIf="(registrationForm.controls.lname.touched || submitted) && registrationForm.controls.lname.errors?.required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" formControlName="email"
+                                class="form-control input-sm shadow-none" placeholder="Email">
+                            <img src="../../assets/err.png" class="set-validation-text"
+                                *ngIf="(registrationForm.controls.email.touched || submitted) && registrationForm.controls.email.errors?.required">
+                            <img src="../../assets/err.png" class="set-validation-text"
+                                *ngIf="(registrationForm.controls.email.touched || submitted) && registrationForm.controls.email.errors?.email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="Address" formControlName="address"
+                                class="form-control input-sm shadow-none" placeholder="Address">
+                            <img src="../../assets/err.png" class="set-validation-text"
+                                *ngIf="(registrationForm.controls.address.touched || submitted) && registrationForm.controls.address.errors?.required">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm shadow-none"
+                                        formControlName="pincode" placeholder="Pin Code">
+                                    <img src="../../assets/err.png" class="set-validation-text"
+                                        *ngIf="(registrationForm.controls.pincode.touched || submitted) && registrationForm.controls.pincode.errors?.required">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="mobile" formControlName="mobile"
+                                        class="form-control input-sm shadow-none" placeholder="Mobile">
+                                    <img src="../../assets/err.png" class="set-validation-text"
+                                        *ngIf="(registrationForm.controls.mobile.touched || submitted) && registrationForm.controls.mobile.errors?.required">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" id="password" formControlName="password"
+                                        class="form-control input-sm shadow-none" placeholder="Password">
+                                    <img src="../../assets/err.png" class="set-validation-text"
+                                        *ngIf="(registrationForm.controls.password.touched || submitted) && registrationForm.controls.password.errors?.required">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" id="password_confirmation" formControlName="confirmPass"
+                                        class="form-control input-sm shadow-none shadow-none" placeholder="Confirm">
+                                    <img src="../../assets/err.png" class="set-validation-text"
+                                        *ngIf="(registrationForm.controls.confirmPass.touched || submitted) && registrationForm.controls.confirmPass.errors?.required">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="button" [disabled]='!registrationForm.valid' value="Register" (click)="userRegistration()"
+                            class="btn btn-info btn-block shadow-none">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

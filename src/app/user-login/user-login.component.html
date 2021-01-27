@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 set-position">
+        <div class="panel">
+            <div class="panel-heading">
+                    <h5 class="panel-title">Please Sign In <small style="font-size:12px">Securely !</small></h5>
+                     </div>
+                     <div class="panel-body">
+                    <form [formGroup]="loginForm">
+                        <div class="row">
+                        </div>
+                        <div class="form-group">
+                            <input type="email"  id="email" formControlName="email" class="form-control input-sm shadow-none" placeholder="Email">
+                            <img src="../../assets/err.png"
+                            *ngIf="(loginForm.controls.email.touched || submitted) && loginForm.controls.email.errors?.required"
+                            class="set-validation-text">
+                            <img src="../../assets/err.png"
+                            *ngIf="(loginForm.controls.email.touched || submitted) && loginForm.controls.email.errors?.email"
+                            class="set-validation-text">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="Address" formControlName="password" class="form-control input-sm shadow-none" placeholder="Password">
+                            <img src="../../assets/err.png"
+                            *ngIf="(loginForm.controls.password.touched || submitted) && loginForm.controls.password.errors?.required"
+                            class="set-validation-text">
+                        </div>                 
+                        <input type="button" [disabled]='!loginForm.valid' value="Sign In" (click)="userLogin()" class="btn btn-info shadow-none set-Login">
+                        <a class="register-set" (click)="goRegistration()">New Registration</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
