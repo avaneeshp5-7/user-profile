@@ -94,18 +94,36 @@ export class UserProfileComponent implements OnInit {
     this.userdata = user;
   }
   deleteUser(id: any) {
-    this.service.deleteUser({ id: id }).subscribe(deletd => {
-      if (deletd['success'] == true) {
-        Swal.fire('Success', 'User deteletd !', 'success').then((result)=>{
-          if(result.value==true){
-            this.getAllUser();
+    Swal.fire({
+      title: 'Are you sure want to delete?',
+      text: 'You will not be able to recover this user!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it !',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.service.deleteUser({ id: id }).subscribe(dt => {
+          if (dt['success'] == true) {
+            Swal.fire(
+              'Deleted!',
+              'User has been deleted !',
+              'success'
+            ).then((result) => {
+              if (result.value == true) {
+                this.getAllUser();
+              }
+            });
           }
-        })
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'User is safe :)',
+          'error'
+        )
       }
-      else {
-        Swal.fire('Fail', 'Not deteletd !', 'error');
-      }
-    });
+    })
   }
 }
 
