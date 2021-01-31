@@ -5,20 +5,19 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <img src="../../assets/profile.png"
-                                alt="" class="img-circle"><br><br>
-                            <h5 style="text-align:center;"><strong id="user-name">{{userdata.fname}} {{userdata.lname}}</strong></h5>
+                            <img src="../../assets/profile.png" alt="" class="img-circle"><br><br>
+                            <h5 style="text-align:center;"><strong id="user-name">{{userdata.fname}}
+                                    {{userdata.lname}}</strong></h5>
                             <!-- <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213 </p> -->
                             <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">
                                 {{userdata.email}} </p>
                             <p style="text-align:center;font-size: smaller;">{{userdata.mobile}}</p>
                             <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">
-                              {{userdata.address}} {{userdata.pincode}}
-                              <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faPencilAlt" (click)="editPach()"></fa-icon>
+                                {{userdata.address}} {{userdata.pincode}}
+                                <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faPencilAlt" (click)="editPach()">
+                                </fa-icon> &nbsp;
+                                <a id="setALlUser" (click)="getAllUser()">Get All User's</a>
                             </p>
-                            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div> -->
-                            <!-- <p style="text-align:center;font-size: smaller;"><strong>Job role</strong></p>
-                            <p style="text-align:center;font-size: smaller;" id="user-role">Software Engineer</p> -->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 divider text-center"></div>
                         </div>
                     </div>
@@ -33,7 +32,9 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 set-position">
             <div class="panel">
                 <div class="panel-heading">
-                    <h5 class="panel-title">Please sign up <small>It's free!</small></h5>
+                    <h5 class="panel-title">Please sign up <small>It's free!</small>
+                        <img src='../../assets/close.png' class='setImage' (click)="cancelUpadte()">
+                    </h5>
                 </div>
                 <div class="panel-body">
                     <form [formGroup]="registrationForm">
@@ -93,6 +94,38 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div *ngIf="showUser" class="container">
+    <div *ngIf="allUsers" class="row">
+        <div class="allProfile"> <img src='../../assets/close.png' class='setImage' (click)="closeAllUsers()">
+            <table class="table table-responsive">
+                <tr>
+                    <th>Choose</th>
+                    <th>Sr No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let user of allUsers;let i='index'">
+                    <td><input type="radio" name="use" (click)="selctedUser(user)"></td>
+                    <td style="color: aliceblue;">{{i+1}}</td>
+                    <td style="color: aliceblue;">{{user.fname}}</td>
+                    <td style="color: aliceblue;">{{user.lname}}</td>
+                    <td style="color: aliceblue;">{{user.email}}</td>
+                    <td style="color: aliceblue;">{{user.mobile}}</td>
+                    <td style="color: aliceblue;">{{user.address}}</td>
+                    <td>
+                        <input type="button" value="delete" (click)="deleteUser(user.user_id)" class="btn btn-danger shadow-none">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

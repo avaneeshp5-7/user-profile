@@ -36,6 +36,7 @@ exports.userRegstration = (rq, rs) => {
       }
    });
 }
+
 exports.userlogin = (request, response) => {
    var email = request.body.email;
    var sql = 'SELECT * FROM user_registration WHERE email = ?';
@@ -46,22 +47,30 @@ exports.userlogin = (request, response) => {
             message: err
          });
       } else {
-         bcrypt.compare(request.body.password, results[0].password).then(function (result) {
-            console.log(result);
-            if (result == true) {
-               response.json({
-                  success: true,
-                  data: results,
-                  message: 'User login !'
-               });
-            } else {
-               response.json({
-                  success: false,
-                  data: err,
-                  message: 'Invalid credentials'
-               });
-            }
-         });
+         if (results.length === 1) {
+            bcrypt.compare(request.body.password, results[0].password).then(function (result) {
+               console.log(result);
+               if (result == true) {
+                  response.json({
+                     success: true,
+                     data: results,
+                     message: 'User login !'
+                  });
+               } else {
+                  response.json({
+                     success: false,
+                     data: err,
+                     message: 'Invalid credentials'
+                  });
+               }
+            });
+         } else {
+            response.json({
+               success: false,
+               data: err,
+               message: 'Invalid credentials'
+            });
+         }
       }
    });
 }
@@ -100,4 +109,37 @@ exports.updateUser = (req, res) => {
       }
    });
 }
-// "update user_registration SET fname = '" + req.body.fname + "' , lname='" + req.body.lname + "' , '" + req.body.email + "' , '" + req.body.address + "' , '" + req.body.pincode + "' , '" + req.body.mobile + "' where user_id = '" + ids + "'"
+exports.getAllUsers = (req, res) => {
+   connection.query('SELECT * from user_registration', (err, data) => {
+      if (err) {
+         res.send({
+            success: false,
+            message: 'not data found !',
+            err: err
+         });
+      } else {
+         res.send({
+            success: true,
+            message: 'data found !',
+            data: data
+         });
+      }
+   });
+}
+
+exports.deleteUser = (req, res) => {
+   connection.query("DELETE from user_registration WHERE user_id='" + req.body.id + "'", (er, result) => {
+      if (er) {
+         res.send({
+            success: false,
+            message: 'not deleted !',
+            err: err
+         });
+      } else {
+         res.send({
+            success: true,
+            message: 'deleted !',
+         });
+      }
+   });
+}

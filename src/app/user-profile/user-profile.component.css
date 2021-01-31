@@ -4,6 +4,8 @@
     margin: auto;
     margin-top: 100px;
     color: azure;
+    font-style: oblique;
+
 }
 .img-circle{
     height: 73px;
@@ -38,4 +40,31 @@ input{
     width: 24px;
     margin-top: -29px;
     margin-right: 6px
+}
+.setImage{
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    float: right;
+    cursor: pointer;
+}
+#setALlUser{
+    color:rgb(255, 145, 0);
+    font-weight:bold;
+    cursor: pointer;
+}
+#setALlUser:hover{
+    text-decoration:underline;
+    color:azure
+}
+
+/* Table Style */
+
+.allProfile{
+    margin: auto;
+    background: cadetblue;
+    color: aliceblue;
+    font-style: oblique;
+    padding: 12px;
+    text-align: center;
 }

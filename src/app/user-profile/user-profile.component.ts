@@ -10,9 +10,11 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class UserProfileComponent implements OnInit {
   userid: any;
+  allUsers: any
   userdata: any;
   profile: boolean;
   editPage: boolean;
+  showUser: boolean;
   faPencilAlt = faPencilAlt;
   errMsg;
   submitted: boolean;
@@ -21,6 +23,7 @@ export class UserProfileComponent implements OnInit {
     this.userid = '';
     this.userdata = [];
     this.profile = true;
+    this.showUser = false;
     this.editPage = false;
     this.registrationForm = fb.group({
       fname: ['', Validators.required],
@@ -32,10 +35,12 @@ export class UserProfileComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.userid = JSON.parse(localStorage.getItem('currentUser'));
-    this.init();
+    if (localStorage.getItem('currentUser') != null) {
+      this.userid = JSON.parse(localStorage.getItem('currentUser'));
+      this.init();
+    }
   }
-  init(){
+  init() {
     this.service.findUser({ id: this.userid.user_id }).subscribe(user => {
       this.userdata = user['data'][0]
     });
@@ -45,21 +50,62 @@ export class UserProfileComponent implements OnInit {
     this.editPage = true;
     this.registrationForm.patchValue(this.userdata);
   }
+  cancelUpadte() {
+    this.profile = true;
+    this.editPage = false;
+  }
   updateUser() {
-    var ids = this.userid.user_id
+    var ids = this.userdata.user_id ? this.userdata.user_id : this.userid.user_id
     this.registrationForm.value.id = ids;
     if (this.registrationForm.valid) {
       this.service.updateUser(this.registrationForm.value).subscribe(updat => {
         if (updat['success'] == true) {
-          Swal.fire('Success', 'Profile updated !', 'success');
-          this.profile = true;
-          this.editPage = false;
-          this.init();
-        }else{
-          this.errMsg=updat['message'];
+          Swal.fire('Success', 'Profile updated !', 'success').then((result) => {
+            console.log(result)
+            if (result.value == true) {
+              this.profile = true;
+              this.editPage = false;
+              this.init();
+            } else {
+              return;
+            }
+          })
+
+        } else {
+          this.errMsg = updat['message'];
           Swal.fire('Failed', 'Not updated !', 'error');
         }
       });
     }
   }
+  getAllUser() {
+    this.service.findAllUsers().subscribe(users => {
+      this.allUsers = users['data'];
+      this.showUser = true;
+      if (this.allUsers.length === 0) {
+        localStorage.removeItem('currentUser');
+      }
+    });
+  }
+  closeAllUsers() {
+    this.showUser = false;
+  }
+  selctedUser(user: any) {
+    this.userdata = user;
+  }
+  deleteUser(id: any) {
+    this.service.deleteUser({ id: id }).subscribe(deletd => {
+      if (deletd['success'] == true) {
+        Swal.fire('Success', 'User deteletd !', 'success').then((result)=>{
+          if(result.value==true){
+            this.getAllUser();
+          }
+        })
+      }
+      else {
+        Swal.fire('Fail', 'Not deteletd !', 'error');
+      }
+    });
+  }
 }
+

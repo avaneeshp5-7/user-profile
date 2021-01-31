@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
@@ -35,10 +36,15 @@ export class UserRegistrationComponent implements OnInit {registrationForm: Form
         this.userData = dt;
         console.log(this.userData['success']);
         if (this.userData['success'] === true) {
-            alert(this.userData['message']);
-            this.rout.navigateByUrl('/');
+          Swal.fire('Success', 'User Sign Up  !', 'success').then((result) => {
+            if (result.value == true) {
+              this.rout.navigateByUrl('/');
+            } else {
+              result;
+            }
+          });
         } else {
-            alert(this.userData['message']);
+          Swal.fire('Fail !', this.userData['message'], 'error');
         }
     });
 }
