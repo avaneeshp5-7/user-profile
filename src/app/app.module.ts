@@ -8,8 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AuthGaurdService } from './auth-gaurd.service';
 import { HttpAuthGaurdService } from './http-auth-gaurd.service';
+
 
 
 @NgModule({

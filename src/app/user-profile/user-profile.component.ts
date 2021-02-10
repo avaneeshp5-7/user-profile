@@ -65,12 +65,11 @@ export class UserProfileComponent implements OnInit {
             if (result.value == true) {
               this.profile = true;
               this.editPage = false;
-              this.init();
+              this.getAllUser();
             } else {
               return;
             }
           })
-
         } else {
           this.errMsg = updat['message'];
           Swal.fire('Failed', 'Not updated !', 'error');

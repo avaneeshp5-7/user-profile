@@ -23,8 +23,17 @@
                             <img src="../../assets/err.png"
                             *ngIf="(loginForm.controls.password.touched || submitted) && loginForm.controls.password.errors?.required"
                             class="set-validation-text">
-                        </div>                 
-                        <input type="button" [disabled]='!loginForm.valid' value="Sign In" (click)="userLogin()" class="btn btn-info shadow-none set-Login">
+                        </div> 
+
+                        <button *ngIf="submitted==false" type="button" [disabled]='!loginForm.valid'  (click)="userLogin()" class="btn btn-info shadow-none set-Login">
+                            <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faArrowLeft">
+                            </fa-icon> &nbsp; Sign In</button>
+                            <button *ngIf="submitted" type="button"  class="btn btn-info shadow-none set-Login">
+                                <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faSpinner">
+                                </fa-icon> &nbsp;
+                                Sign In
+                            </button>
+                      
                         <a class="register-set" (click)="goRegistration()">New Registration</a>
                     </form>
                 </div>
