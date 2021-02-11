@@ -78,13 +78,13 @@ export class UserProfileComponent implements OnInit {
     }
   }
   getAllUser() {
-    this.service.findAllUsers().subscribe(users => {
-      this.allUsers = users['data'];
-      this.showUser = true;
-      if (this.allUsers.length === 0) {
-        localStorage.removeItem('currentUser');
-      }
-    });
+      this.service.findAllUsers().subscribe(users => {
+        this.allUsers = users['data'];
+        this.showUser = true;
+        if (this.allUsers.length === 0) {
+          localStorage.removeItem('currentUser');
+        }
+      });
   }
   closeAllUsers() {
     this.showUser = false;

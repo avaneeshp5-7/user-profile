@@ -9,7 +9,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpAuthGaurdService } from './http-auth-gaurd.service';
-
+import { NgHttpLoaderModule } from 'ng-http-loader'
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { HttpAuthGaurdService } from './http-auth-gaurd.service';
     AppRoutingModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgHttpLoaderModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

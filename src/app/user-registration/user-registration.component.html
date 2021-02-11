@@ -74,17 +74,21 @@
                                 </div>
                             </div>
                         </div>
-                        <button  *ngIf="submitted"  class="btn btn-info btn-block shadow-non">
+                        <button *ngIf="submitted" class="btn btn-info btn-block shadow-non">
                             <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faSpinner">
                             </fa-icon> &nbsp;
                             Sign Up
                         </button>
-                        <button  *ngIf="submitted==false" [disabled]='!registrationForm.valid'
+                        <button *ngIf="submitted==false" [hidden]='!registrationForm.valid'
                             (click)="userRegistration()" class="btn btn-info btn-block shadow-non">
                             <fa-icon class="mt-0 ml-1 ng-fa-icon faEdit" [icon]="faArrowLeft">
                             </fa-icon> &nbsp; Sign Up
                         </button>
                     </form>
+                    <!-- <form [formGroup]="newForm" [hidden]='!registrationForm.valid'>
+                        <input type="text"  class="form-control input-sm shadow-none" formControlName='name'><br>
+                        <input type="text"  class="form-control input-sm shadow-none" formControlName='job'>
+                    </form> -->
                 </div>
             </div>
         </div>
